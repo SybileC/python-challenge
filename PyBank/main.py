@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join("C:/Users/Babyta/Desktop/Columbia BCS", "budget_data.csv")
+csvpath = os.path.join("C:/Users/Babyta/Desktop/Columbia BCS/python-challenge/PyBank/Resources", "budget_data.csv")
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -20,6 +20,7 @@ with open(csvpath) as csvfile:
     print("Total:" + str(columnvalue))   
     
     listcsvreader = list(csvreader)
+    
     i = 0
     change = 0
     listcolumnvalue = []
@@ -28,7 +29,16 @@ with open(csvpath) as csvfile:
         i = i + 1
         listcolumnvalue.append(change)
 
-    print(listcolumnvalue)
+    #print(listcolumnvalue)
+    total = 0
+    x = 0
+    while x < len(listcolumnvalue):
+        total = total + listcolumnvalue[x]
+
+    print(total)
+
+
+
     #print(change)
     
     

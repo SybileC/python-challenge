@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join("C:/Users/Babyta/Desktop/Columbia BCS", "election_data.csv")
+csvpath = os.path.join("C:/Users/Babyta/Desktop/Columbia BCS/python-challenge/PyPoll/Resources", "election_data.csv")
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=(','))
@@ -42,33 +42,13 @@ with open(csvpath) as csvfile:
     
     print("---------------------------------------")
     
-    Winner = []
+    Winner = {"Khan": 0, "Li": 0, "Correy": 0, "O'Tooley": 0}
 
-    Winner.append(Khan)
-    Winner.append(Li)
-    Winner.append(Correy)
-    Winner.append(O_Tooley)
+    Winner["Khan"] = Khan
+    Winner["Li"] = Li
+    Winner["Correy"] = Correy
+    Winner["O'Tooley"] = O_Tooley
 
-    Findwinner = max(winner)
+    Findwinner = max(Winner, key=Winner.get)
 
-    print(Findwinner)
-
-
-
-    #listcsvreader = list(csvreader)
-    #print(listcsvreader)
-
-        #list the different variables
-        #Khan = 0
-        #Li = 0
-        #Correy = 0
-        #O_Tooley = 0
-        #loop through 3rdd column of file
-        #for row[2] in csvreader:
-            #if 
-            
-            #Khan = khan + 1
-            
-
-    
-
+    print("Winner:" + " " + str(Findwinner))
