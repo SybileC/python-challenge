@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join("C:/Users/Babyta/Desktop/Columbia BCS/python-challenge/PyPoll/Resources", "election_data.csv")
+csvpath = "Resources/election_data.csv"
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=(','))
@@ -24,7 +24,7 @@ with open(csvpath) as csvfile:
         elif row[2] == "Li":
             Li = Li + 1
         elif row[2] == "Correy":
-            Correy == Correy + 1
+            Correy = Correy + 1
         else:
             O_Tooley = O_Tooley + 1
 
@@ -52,3 +52,5 @@ with open(csvpath) as csvfile:
     Findwinner = max(Winner, key=Winner.get)
 
     print("Winner:" + " " + str(Findwinner))
+
+    
