@@ -10,9 +10,8 @@ with open(csvpath) as csvfile:
 #Use next() function to skip file's header
     next(csvreader)
 
-#Print
-    Header = "Election Results"
-    print(Header)
+#Print Header
+    print("Election Results")
     print("---------------------------------------")
 
 #define the total number of votes and the total number for each candidate as variables with zero value     
@@ -24,9 +23,9 @@ with open(csvpath) as csvfile:
 
 #Use for loop to go through each row and add values to each variable    
     for row in csvreader:
-#Add the value of each row from first column to get totalvotes
+#Add each line to determine the number of votes
         totalvotes += 1
-#Use If function to count for votes for each candidate  
+#Use If function to count votes for each candidate  
         if row[2] == "Khan":
             Khan = Khan + 1
         elif row[2] == "Li":
@@ -51,27 +50,37 @@ with open(csvpath) as csvfile:
     
     print("---------------------------------------")
 
-#Create a dictionary to associate each candidate with the number of vote they gathered    
+#Create a dictionary to associate each candidate with the number of votes they garnered    
     Winner = {"Khan": 0, "Li": 0, "Correy": 0, "O'Tooley": 0}
 
-    Winner["Khan"] = [Khan, Khanpercentage]
-    Winner["Li"] = [Li, Lipercentage]
-    Winner["Correy"] = [Correy, Correypercentage]
-    Winner["O'Tooley"] = [O_Tooley, O_Tooleypercentage]
+    Winner["Khan"] = [Khan]
+    Winner["Li"] = [Li]
+    Winner["Correy"] = [Correy]
+    Winner["O'Tooley"] = [O_Tooley]
 
 #Find winner by using max() function 
     Findwinner = max(Winner, key=Winner.get)
 
     print("Winner:" + " " + str(Findwinner))
 
+#Create output path for csv file to be created
 outputfile = "Analysis/PyPoll"
 
-#votes = totalvotes
+#Create 3 lists (candidates, number of votes for each candidate, and percentage of vote for each candidate) 
+Candidates = ["Khan", "Li", "Correy", "O'Tooley"]
+Candidatesvotes = [Khan, Li, Correy, O_Tooley]
+Candidatespercentagevote = [Khanpercentage, Lipercentage, Correypercentage, O_Tooleypercentage]
 
-pypoll = [Winner, Findwinner]
+#Use zip function to combine 3 lists
+pypoll = zip(Candidates, Candidatesvotes, Candidatespercentagevote)
 
+#Open output file and use the writer object to edit file
 with open(outputfile, 'w') as datafile:
     csvwriter = csv.writer(datafile)
 
-    csvwriter.writerow([Header])
-    csvwriter.writerows(Winner)
+#Print in rows 
+    csvwriter.writerow(["Election Results"])
+    csvwriter.writerow(["Total Votes", totalvotes])
+    csvwriter.writerows(pypoll)
+    csvwriter.writerow(["Winner", Findwinner])
+    
