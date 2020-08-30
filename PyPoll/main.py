@@ -3,15 +3,16 @@ import csv
 
 csvpath = "Resources/election_data.csv"
 
-#open file and convert it into a 
+#Open file and use the reader object to read it
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=(','))
 
 #Use next() function to skip file's header
     next(csvreader)
 
-#Print 
-    print("Election Results")
+#Print
+    Header = "Election Results"
+    print(Header)
     print("---------------------------------------")
 
 #define the total number of votes and the total number for each candidate as variables with zero value     
@@ -36,10 +37,10 @@ with open(csvpath) as csvfile:
             O_Tooley = O_Tooley + 1
 
 #Calculate the percentage of votes for each candidate based on the total number of votes
-    Khanpercentage = Khan /totalvotes * 100
-    Lipercentage = Li /totalvotes * 100
-    Correypercentage = Correy /totalvotes * 100
-    O_Tooleypercentage = O_Tooley / totalvotes * 100
+    Khanpercentage = round((Khan /totalvotes * 100), 1)
+    Lipercentage = round(Li /totalvotes * 100, 1)
+    Correypercentage = round(Correy /totalvotes * 100, 1)
+    O_Tooleypercentage = round(O_Tooley / totalvotes * 100, 1)
     
 #Convert findings into string to concatenate with other strings when printing in Terminal 
     print("Total Votes:" + " " + str(totalvotes))
@@ -53,27 +54,24 @@ with open(csvpath) as csvfile:
 #Create a dictionary to associate each candidate with the number of vote they gathered    
     Winner = {"Khan": 0, "Li": 0, "Correy": 0, "O'Tooley": 0}
 
-    Winner["Khan"] = Khan
-    Winner["Li"] = Li
-    Winner["Correy"] = Correy
-    Winner["O'Tooley"] = O_Tooley
+    Winner["Khan"] = [Khan, Khanpercentage]
+    Winner["Li"] = [Li, Lipercentage]
+    Winner["Correy"] = [Correy, Correypercentage]
+    Winner["O'Tooley"] = [O_Tooley, O_Tooleypercentage]
 
-#
+#Find winner by using max() function 
     Findwinner = max(Winner, key=Winner.get)
 
     print("Winner:" + " " + str(Findwinner))
 
 outputfile = "Analysis/PyPoll"
 
+#votes = totalvotes
+
+pypoll = [Winner, Findwinner]
+
 with open(outputfile, 'w') as datafile:
     csvwriter = csv.writer(datafile)
 
-    csvwriter.writerow("Election Results")
-    csvwriter.writerow("---------------------------------------")
-    csvwriter.writerow("Total Votes:" + " " + str(totalvotes))
-    csvwriter.writerow("Khan:" + " " + str(Khanpercentage) + "%" + "  " + "(" + str(Khan) + ")")
-    csvwriter.writerow("Li:" + " " + str(Lipercentage) + "%" + "  " + "(" + str(Li) + ")")
-    csvwriter.writerow("Correy:" + " " + str(Correypercentage) + "%" + "  " + "(" + str(Correy) + ")")
-    csvwriter.writerow("O'Tooley:" + " " + str(O_Tooleypercentage) + "%" + "  " + "(" + str(O_Tooley) + ")")
-    csvwriter.writerow("---------------------------------------")
-    csvwriter.writerow("Winner:" + " " + str(Findwinner))
+    csvwriter.writerow([Header])
+    csvwriter.writerows(Winner)
