@@ -12,13 +12,36 @@ with open(csvpath) as csvfile:
 
     numbermonths = 0
     columnvalue = 0
+    listchanges = []
+    change = 0
+    rowcount = 0
     for row in csvreader:
         numbermonths += 1
-        columnvalue = float(row[1]) + columnvalue
+        columnvalue = float(row[1]) + columnvalue 
+        change = float(row[1]) - change
+        rowcount += 1
+        listchanges.append(change)   
+
+    averagechange = (listchanges[85] - listchanges[0]) / (numbermonths - 1)
 
     
+
+    print("Total Months:" + "  " + str(numbermonths))
+    print("Total:" + "  " + str(columnvalue))
+    print(str(listchanges))
+    #print("Average Change:" + "  " + str(averagechange))
         
     
+
+#change = 867884
+    #listchanges = []
+    #row = 1
+    #for row[1] in csvreader:
+     #   change = float(row[1]) - change
+      #  row = row + 1
+       # listchanges.append(change)
+
+
     #listcsvreader = list(csvreader)
 
     #print(listcsvreader)
@@ -40,4 +63,3 @@ with open(csvpath) as csvfile:
     #print("Total Months:" + str(numbermonths))
     #print("Total:" + str(columnvalue))
    # print(listcolumnvalue)
-
