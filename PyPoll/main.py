@@ -64,21 +64,21 @@ with open(csvpath) as csvfile:
     print("Winner:" + " " + str(Findwinner))
 
 #Create output path for csv file to be created
-outputfile = "Analysis/PyPoll"
+outputfile = "Analysis/PyPoll.csv"
 
 #Create 3 lists (candidates, number of votes for each candidate, and percentage of vote for each candidate) 
 Candidates = ["Khan", "Li", "Correy", "O'Tooley"]
 Candidatesvotes = [Khan, Li, Correy, O_Tooley]
 Candidatespercentagevote = [Khanpercentage, Lipercentage, Correypercentage, O_Tooleypercentage]
 
-#Use zip function to combine 3 lists
+#Use zip function to combine the 3 lists
 pypoll = zip(Candidates, Candidatesvotes, Candidatespercentagevote)
 
 #Open output file and use the writer object to edit file
 with open(outputfile, 'w') as datafile:
     csvwriter = csv.writer(datafile)
 
-#Print in rows 
+#Print rows 
     csvwriter.writerow(["Election Results"])
     csvwriter.writerow(["Total Votes", totalvotes])
     csvwriter.writerows(pypoll)
